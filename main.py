@@ -4,14 +4,14 @@
 # provides hourly updates and alerts when
 # conditions change
 #
-# to look up location codes:  https://openweathermap.org
-#
 
 import os
 from dotenv import load_dotenv
 import requests
 import json
 import datetime
+
+from city_codes import get_city_code
 
 # load env variables
 from dotenv import load_dotenv
