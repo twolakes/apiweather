@@ -19,10 +19,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 owm_key = os.getenv("OWM_KEY")
-city_code = get_city_code('Cuenca-EQ')
+city_code = get_city_code('Key Largo')
 
-weather_data = get_weather(city_code, owm_key)
-print(weather_data)
+weather_data = get_weather(city_code, owm_key).decode('UTF-8')
+weather_dict = json.loads(weather_data)
+print(weather_dict)
+
+
+# mm/dd/yy hh:mm:ss    Cuenca EC    72F (76F)    4 mph / 90    broken clouds    
 
 
 
