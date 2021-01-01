@@ -11,7 +11,7 @@ import requests
 import json
 import datetime
 
-from helpers.weather_fs import get_weather
+from helpers.weather_fs import get_weather, parse_hrly_rpt
 from helpers.city_codes import get_city_code
 
 # load env variables
@@ -21,10 +21,11 @@ load_dotenv()
 owm_key = os.getenv("OWM_KEY")
 city_code = get_city_code('Key Largo')
 
-weather_data = get_weather(city_code, owm_key).decode('UTF-8')
-weather_dict = json.loads(weather_data)
-print(weather_dict)
+response = get_weather(city_code, owm_key).decode('UTF-8')
+weather_data = json.loads(response)
+hrly_weather_rpt = parse_hrly_rpt(weather_data)
 
+print(hrly_weather_rpt)
 
 # mm/dd/yy hh:mm:ss    Cuenca EC    72F (76F)    4 mph / 90    broken clouds    
 
