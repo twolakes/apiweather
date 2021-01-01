@@ -1,6 +1,5 @@
 import requests
 from datetime import datetime
-import pytz
 
 def get_weather(city_code, api_key=0):
 
@@ -19,5 +18,19 @@ def get_weather(city_code, api_key=0):
 
 def parse_hrly_rpt(weather_data):
     obs_time = datetime.utcfromtimestamp(weather_data['dt'] + weather_data['timezone'])
-    time_str = obs_time.strftime("%Y-%m-%d %H:%M:%S").ljust(23)
-    return time_str
+    time_str = obs_time.strftime("%Y-%m-%d %H:%M:%S").ljust(21)
+    location_str = f"{weather_data['name'][0:13]} {weather_data['sys']['country']}".ljust(18)
+    temp_str = f"{weather_data['main']['temp']:3.0f}F ({weather_data['main']['feels_like']:3.0f}F)".rjust(14)
+    wind_str = f"{weather_data['wind']['speed']:5.1f} mph/{weather_data['wind']['deg']}".rjust(16)
+    cond_str = f"{4 * ' '}{weather_data['weather'][0]['description']}"    
+    
+    hrly_weather_rpt = f"{time_str}{location_str}{temp_str}{wind_str}{cond_str}"
+    
+    return hrly_weather_rpt
+
+
+
+
+
+
+
