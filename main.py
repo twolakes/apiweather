@@ -19,13 +19,18 @@ from dotenv import load_dotenv
 load_dotenv()
 
 owm_key = os.getenv("OWM_KEY")
-city_code = get_city_code('Key Largo')
+city_list = ['La Libertad-EQ', 'Cuenca-EQ']
+city_codes = ''
+for city in city_list:
+    city_codes += ','
+    city_codes += str(get_city_code(city))
 
-response = get_weather(city_code, owm_key).decode('UTF-8')
+response = get_weather(city_codes[1:], owm_key).decode('UTF-8')
 weather_data = json.loads(response)
-hrly_weather_rpt = parse_hrly_rpt(weather_data)
+print(weather_data)
+# hrly_weather_rpt = parse_hrly_rpt(weather_data)
 
-print(hrly_weather_rpt)
+# print(hrly_weather_rpt)
 
 # mm/dd/yy hh:mm:ss    Cuenca EC    72F (76F)    4 mph / 90    broken clouds    
 
