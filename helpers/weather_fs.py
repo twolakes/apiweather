@@ -17,7 +17,10 @@ def get_weather(city_codes, api_key=0):
     
 
 def parse_hrly_rpt(weather_data):
+    # set weather data observation d/t in location's local time
     obs_time = datetime.utcfromtimestamp(weather_data['dt'] + weather_data['sys']['timezone'])
+
+    # build report elements
     time_str = obs_time.strftime("%Y-%m-%d %H:%M:%S").ljust(21)
     location_str = f"{weather_data['name'][0:13].upper()} {weather_data['sys']['country']}".ljust(18)
     temp_str = f"{weather_data['main']['temp']:3.0f}F ({weather_data['main']['feels_like']:3.0f}F)".rjust(14)
