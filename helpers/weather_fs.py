@@ -3,6 +3,8 @@ from datetime import datetime
 
 def get_weather(city_codes, api_key=0):
 
+    print(city_codes)
+
     # build url w query params
     base_url = 'http://api.openweathermap.org/data/2.5/group'
     units = 'imperial'      # 'imperial' or 'metric'

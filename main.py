@@ -26,14 +26,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # initialize
-time_start = time.time()
 call_interval = 1800      # in seconds
 owm_key = os.getenv("OWM_KEY")
-city_list = ['Key Largo', 'Charleston SC']
-city_codes = ''
-for city in city_list:
-    city_codes += ','
-    city_codes += str(get_city_code(city))
+city_list = ['Cuenca-EQ', 'La Libertad-EQ']
+
+time_start = time.time()
+city_codes = [str(get_city_code(city)) for city in city_list]
 
 clear_terminal()
 print(f"\n***** Tracking weather data for {', '.join(city_list)}") 
@@ -41,7 +39,7 @@ print(f"\n***** Tracking weather data for {', '.join(city_list)}")
 # main loop
 while True:
     # call for weather data
-    response = get_weather(city_codes[1:], owm_key).decode('UTF-8')
+    response = get_weather(','.join(city_codes), owm_key).decode('UTF-8')
     weather_data = json.loads(response)
 
     # output data
